@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ssh-client-deploy
+  name: ssh-client-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssh-client-deploy
+  template:
+    metadata:
+      labels:
+        app: ssh-client-deploy
+    spec:
+      containers:
+      - name: ssh-client
+        image: harbor.rubikstack.com/wowjoy/lichen/ssh-client:20230726
+        imagePullPolicy: IfNotPresent
+        command: ["sleep", "infinity"]
+      restartPolicy: Always
+      schedulerName: default-scheduler
